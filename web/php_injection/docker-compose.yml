@@ -1,0 +1,26 @@
+version: '3'
+services:
+  app:
+    build:
+      context: ./docker/php
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8
+    volumes:
+        - ./docker/mysql/data:/var/lib/mysql
+        - ./docker/mysql/my.conf:/etc/mysql/conf.d/my.cnf
+    environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=test_db
+        - MYSQL_USER=test_user
+        - MYSQL_PASSWORD=test_password
+    ports:
+        - "4306:3306"
+    container_name: mysql8-1

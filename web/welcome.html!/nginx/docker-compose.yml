@@ -1,0 +1,7 @@
+nginx:
+ image: nginx:latest
+ container_name: nginx
+ ports:
+   - "5001:80"
+ volumes:
+   - ./resource:/usr/share/nginx/html
